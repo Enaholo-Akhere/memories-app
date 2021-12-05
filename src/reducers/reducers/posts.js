@@ -1,20 +1,26 @@
 import * as Types from "../constants/actionTypes";
-
-const Postsreducers = (posts = [], action) => {
+const initialState = { posts: [] };
+const Postsreducers = (state = initialState, action) => {
   switch (action.type) {
     case Types.DELETE:
-      return posts.filter((post) => post._id !== action.payload);
+      return {
+        ...state,
+        posts: state.posts.filter((post) => post._id !== action.payload),
+      };
     case Types.UPDATE:
     case Types.LIKE:
-      return posts.map((post) =>
-        post._id === action.payload._id ? action.payload : post
-      );
+      return {
+        ...state,
+        posts: state.posts.map((post) =>
+          post._id === action.payload._id ? action.payload : post
+        ),
+      };
     case Types.FETCH_ALL:
-      return action.payload;
+      return { ...state, posts: action.payload.data };
     case Types.CREATE:
-      return [...posts, action.payload];
+      return { ...state, posts: [action.payload.data, ...state.posts] };
     default:
-      return posts;
+      return state;
   }
 };
 

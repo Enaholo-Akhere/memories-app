@@ -6,11 +6,10 @@ import { Grid, CircularProgress } from "@material-ui/core";
 const Posts = ({ setCurrentId }) => {
   const classes = useStyles();
   const posts = useSelector((state) => {
-    return state.PostsReducer.data;
+    return state.posts?.posts || [];
   });
-  console.log(Array.isArray(posts));
-  //const typ = typeof posts;
-  return !posts ? (
+  console.log(posts);
+  return posts.length < 1 ? (
     <CircularProgress />
   ) : (
     <Grid

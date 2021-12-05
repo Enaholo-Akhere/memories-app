@@ -4,16 +4,16 @@ import * as Types from "../constants/actionTypes";
 //action creators
 export const getPosts = () => async (dispatch) => {
   try {
-    const { data: fetch } = await api.fetchPosts();
-    dispatch({ type: Types.FETCH_ALL, payload: fetch });
+    const { data } = await api.fetchPosts();
+    dispatch({ type: Types.FETCH_ALL, payload: data });
   } catch (err) {
     console.log(err);
   }
 };
 
-export const createPosts = (post) => async (dispatch) => {
+export const createPosts = (postData) => async (dispatch) => {
   try {
-    const { data } = await api.createPost(post);
+    const { data } = await api.createPost(postData);
     dispatch({ type: Types.CREATE, payload: data });
   } catch (error) {
     console.log(error);

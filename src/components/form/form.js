@@ -14,9 +14,13 @@ const Form = ({ currentId, setCurrentId }) => {
     selectedFile: "",
   });
   const dispatch = useDispatch();
-  const post = useSelector((state) =>
-    currentId ? state.PostsReducer.data.find((p) => p._id === currentId) : null
-  );
+  const post = useSelector((state) => {
+    return currentId
+      ? state.posts.posts.find((p) => p._id === currentId)
+      : null;
+  });
+
+  console.log(post);
 
   useEffect(() => {
     if (post) {
